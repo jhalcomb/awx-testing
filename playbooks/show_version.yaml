@@ -1,10 +1,10 @@
 ---
 - name: PLAY 1 - SHOW VERSION
-  hosts: all
+  hosts: localhost
   tasks:
 
     - name: TASK 1 - Run 'show version'
-      cisco.ios.ios_command:
+      ansible.builtin.debug:
         commands:
           - "sh ver | i XE Software,"
       register: ver
