@@ -3,12 +3,6 @@
   hosts: localhost
   tasks:
 
-    - name: TASK 1 - Run 'pwd'
+    - name: TASK 1 - Print Working Directory
       ansible.builtin.debug:
-        commands:
-          - pwd
-      register: dir
-
-    - name: TASK 2 - Display 'pwd'
-      ansible.builtin.debug:
-        msg: "{{ dir }}"
+        msg: pwd
