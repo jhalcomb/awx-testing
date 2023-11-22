@@ -3,6 +3,10 @@
   hosts: localhost
   tasks:
 
+    - name: Run 'pwd' on linux
+      ansible.builtin.shell:
+        cmd: pwd
+
     - name: TASK 1 - Print Working Directory
       ansible.builtin.debug:
         msg: pwd
