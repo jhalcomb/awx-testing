@@ -1,0 +1,14 @@
+---
+- name: PLAY 1 - PWD
+  hosts: localhost
+  tasks:
+
+    - name: TASK 1 - Run 'pwd'
+      cisco.ios.ios_command:
+        commands:
+          - pwd
+      register: dir
+
+    - name: TASK 2 - Display 'pwd'
+      ansible.builtin.debug:
+        msg: "{{ dir }}"
