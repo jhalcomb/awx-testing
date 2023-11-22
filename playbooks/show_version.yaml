@@ -11,4 +11,4 @@
 
     - name: TASK 2 - Display 'show version'
       ansible.builtin.debug:
-        msg: "{{ ver }}"
+        msg: "{{ ver.stdout[0] }}"
