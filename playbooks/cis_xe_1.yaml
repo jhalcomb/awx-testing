@@ -1,0 +1,58 @@
+# This playbook is built to CHECK, not configure the devices.
+---
+- name: 1.1 - Management Plane
+  hosts: switches
+  tasks:
+
+    - name: 1.1.1 - aaa new-model
+      cisco.ios.ios_config:
+        lines:
+          - aaa new-model
+
+    - name: 1.1.2 - aaa authentication login
+      cisco.ios.ios_config:
+        lines:
+          - aaa authentication login
+
+    - name: 1.1.3 - aaa authentication enable default
+      cisco.ios.ios_config:
+        lines:
+          - aaa authentication enable default
+
+    - name: 1.1.4 - login authentication
+      cisco.ios.ios_config:
+        lines:
+          - aaa authentication enable default
+        parents:
+          - line vty 0 4
+
+    - name: 1.1.5 - http authentication
+      cisco.ios.ios_config:
+        lines:
+          - ip http authentication
+        when: ip http secure-server
+
+    - name: 1.1.6 - aaa accounting
+      cisco.ios.ios_config:
+        lines:
+          - aaa accounting commands 15
+
+    - name: 1.1.7 - aaa accounting connection
+      cisco.ios.ios_config:
+        lines:
+          - aaa accounting connection
+
+    - name: 1.1.8 - aaa accounting exec
+      cisco.ios.ios_config:
+        lines:
+          - aaa accounting exec
+
+    - name: 1.1.9 - aaa accounting network
+      cisco.ios.ios_config:
+        lines:
+          - aaa accounting network
+
+    - name: 1.1.10 - aaa accounting system
+      cisco.ios.ios_config:
+        lines:
+          - aaa accounting system
