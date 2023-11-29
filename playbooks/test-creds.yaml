@@ -1,0 +1,11 @@
+---
+- name: PLAY 1 - Test Credentials
+  hosts: switches
+  tasks:
+    - name: TASK 1 - Show Username
+      ansible.builtin.debug:
+        msg: "{{ ansible_user }}"
+
+    - name: TASK 1 - Show Password
+      ansible.builtin.debug:
+        msg: "{{ ansible_password }}"
