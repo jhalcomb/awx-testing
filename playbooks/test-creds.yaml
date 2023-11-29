@@ -1,6 +1,6 @@
 ---
 - name: PLAY 1 - Test Credentials
-  hosts: localhost
+  hosts: switches
   tasks:
     - name: TASK 1 - Show Username
       ansible.builtin.debug:
