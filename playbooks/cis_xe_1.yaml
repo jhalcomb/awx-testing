@@ -1,4 +1,6 @@
 # This playbook is built to CHECK, not configure the devices.
+# Variables required:
+#   - local_usernmae
 ---
 - name: 1.1 - Management Plane
   hosts: switches
@@ -75,3 +77,72 @@
         lines:
           - username {{ local_username }} privilege 1
       when: '("username " + local_username +  " privilege") in runningconfig.stdout[0]'
+
+    - name: 1.2.2 - transport input ssh
+      cisco.ios.ios_config:
+        lines:
+          - transport input ssh
+        parents:
+          - line vty 0 4
+
+    - name: 1.2.3 - no exec for aux0 lines
+      cisco.ios.ios_config:
+        lines:
+          - no exec
+        parents:
+          - line aux 0  
+      when: '"line aux" in runningconfig.stdout[0]'
+
+    - name: 1.2.4 - ACL for VTY Existance
+      cisco.ios.ios_config:
+        lines:
+          - ip access-list extended ACL-VTY-PERMIT
+
+    - name: 1.2.5 - ACL for VTY Application
+      cisco.ios.ios_config:
+        lines:
+          - ip access-group ACL-VTY-PERMIT in
+        parents:
+          - line vty 0 4
+  
+    - name: 1.2.6 - exec timeout for AUX line
+      cisco.ios.ios_config:
+        lines:
+          - exec-timeout 10
+        parents:
+          - line aux 0  
+      when: '"line aux" in runningconfig.stdout[0]'
+
+    - name: 1.2.7 - exec timeout for CONSOLE line
+      cisco.ios.ios_config:
+        lines:
+          - exec-timeout 10
+        parents:
+          - line con 0
+
+    - name: 1.2.8 - exec timeout for VTY line
+      cisco.ios.ios_config:
+        lines:
+          - exec-timeout 10
+        parents:
+          - line vty 0 4
+
+    - name: 1.2.9 - transport input none for AUX line
+      cisco.ios.ios_config:
+        lines:
+          - transport input none
+        parents:
+          - line aux 0  
+      when: '"line aux" in runningconfig.stdout[0]'
+
+    - name: 1.2.10 - http secure server limit
+      cisco.ios.ios_config:
+        lines:
+          - ip http max-connections 5
+      when: '"ip http secure-server" in runningconfig.stdout[0]'
+
+    - name: 1.2.11 - exec timeout for http
+      cisco.ios.ios_config:
+        lines:
+          - ip http timeout-policy idle 600 life 43200 requests 43200
+      when: '"ip http secure-server" or "server" in runningconfig.stdout[0]'
