@@ -73,5 +73,5 @@
     - name: 1.2.1 - privilige 1 for local users
       cisco.ios.ios_config:
         lines:
-          - username omhsadmin privilege 1
-      when: '"username omhsadmin privilege" in runningconfig.stdout[0]'    
+          - username {{ local_username }} privilege 1
+      when: '"username " local_username " privilege" in runningconfig.stdout[0]'
