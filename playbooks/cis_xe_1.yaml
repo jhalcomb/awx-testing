@@ -65,3 +65,13 @@
       cisco.ios.ios_config:
         lines:
           - aaa accounting system default start-stop group ISE-TACACS-GROUP
+
+- name: 1.2 - Access Rules
+  hosts: switches
+  tasks:
+
+    - name: 1.2.1 - privilige 1 for local users
+      cisco.ios.ios_config:
+        lines:
+          - username omhsadmin privilege 1
+      when: '"username omhsadmin privilege" in runningconfig.stdout[0]'    
