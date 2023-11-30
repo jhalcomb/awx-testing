@@ -12,7 +12,7 @@
 
     - name: 0.0.1 - Show Running config
       ansible.builtin.debug:
-        msg: "{{ runningconfig }}"
+        msg: "{{ runningconfig.stdout[0] }}"
 
     - name: 1.1.1 - aaa new-model
       cisco.ios.ios_config:
