@@ -7,8 +7,8 @@
     - name: 0.0.0 - Get Running config
       cisco.ios.ios_command:
         commands:
-          - show running_config
-      register: running-config
+          - show running-config
+      register: runningconfig
 
     - name: 1.1.1 - aaa new-model
       cisco.ios.ios_config:
@@ -36,7 +36,7 @@
       cisco.ios.ios_config:
         lines:
           - ip http authentication
-      when: '"ip http secure-server" in {{ running_config }}'
+      when: '"ip http secure-server" in {{ runningconfig }}'
 
     - name: 1.1.6 - aaa accounting
       cisco.ios.ios_config:
