@@ -7,7 +7,7 @@
     - name: 0.0.0 - Get Running config
       cisco.ios.ios_command:
         commands:
-          - sh running-config all
+          - show running-config all
       register: runningconfig
 
     - name: 0.0.1 - Show Running config
