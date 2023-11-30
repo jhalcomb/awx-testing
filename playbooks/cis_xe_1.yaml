@@ -74,4 +74,4 @@
       cisco.ios.ios_config:
         lines:
           - username {{ local_username }} privilege 1
-      when: '"username " local_username " privilege" in runningconfig.stdout[0]'
+      when: '"username {{ local_username }} privilege" in runningconfig.stdout[0]'    
