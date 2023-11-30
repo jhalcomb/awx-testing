@@ -36,7 +36,7 @@
       cisco.ios.ios_config:
         lines:
           - ip http authentication
-      when: "ip http secure-server" in "{{ running-config }}"
+      when: '"ip http secure-server" in {{ running-config }}'
 
     - name: 1.1.6 - aaa accounting
       cisco.ios.ios_config:
