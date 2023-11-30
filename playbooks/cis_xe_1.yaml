@@ -38,30 +38,30 @@
     - name: 1.1.5 - http authentication
       cisco.ios.ios_config:
         lines:
-          - ip http authentication
+          - ip http authentication local
       when: '"ip http secure-server" in runningconfig.stdout[0]'
 
     - name: 1.1.6 - aaa accounting
       cisco.ios.ios_config:
         lines:
-          - aaa accounting commands 15
+          - aaa accounting commands 15 default start-stop group ISE-TACACS-GROUP
 
     - name: 1.1.7 - aaa accounting connection
       cisco.ios.ios_config:
         lines:
-          - aaa accounting connection
+          - aaa accounting connection default start-stop group ISE-TACACS-GROUP
 
     - name: 1.1.8 - aaa accounting exec
       cisco.ios.ios_config:
         lines:
-          - aaa accounting exec
+          - aaa accounting exec default start-stop group ISE-TACACS-GROUP
 
     - name: 1.1.9 - aaa accounting network
       cisco.ios.ios_config:
         lines:
-          - aaa accounting network
+          - aaa accounting network default start-stop group ISE-TACACS-GROUP
 
     - name: 1.1.10 - aaa accounting system
       cisco.ios.ios_config:
         lines:
-          - aaa accounting system
+          - aaa accounting system default start-stop group ISE-TACACS-GROUP
