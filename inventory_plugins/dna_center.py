@@ -306,7 +306,7 @@ class InventoryModule(BaseInventoryPlugin):
         valid = False
         if super(InventoryModule, self).verify_file(path):
             # base class verifies that file exists and is readable by current user
-            if path.endswith(('dna_center.yml')):
+            if path.endswith(('dna_center.yaml')):
                 valid = True
         return valid
 
